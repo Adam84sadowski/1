@@ -1,0 +1,66 @@
+def add_task(todo_list):
+    """Add a task to the to-do list."""
+    task_name = input("Enter the task: ")
+    todo_list.append({"task_name": task_name, "completed": False})
+    print("Task added successfully!")
+
+def mark_task_as_completed(todo_list):
+    """Mark a task as completed."""
+    display_tasks(todo_list)
+    task_index = int(input("Enter the index of the task to mark as completed: "))
+    if 0 <= task_index < len(todo_list):
+        todo_list[task_index]["completed"] = True
+        print("Task marked as completed!")
+    else:
+        print("Invalid task index.")
+
+def remove_task(todo_list):
+    """Remove a task from the to-do list."""
+    display_tasks(todo_list)
+    task_index = int(input("Enter the index of the task to remove: "))
+    if 0 <= task_index < len(todo_list):
+        del todo_list[task_index]
+        print("Task removed successfully!")
+    else:
+        print("Invalid task index.")
+
+def display_tasks(todo_list):
+    """Display the current tasks in the to-do list."""
+    if not todo_list:
+        print("No tasks in the to-do list.")
+    else:
+        print("Current tasks:")
+        for index, task in enumerate(todo_list):
+            status = "Completed" if task["completed"] else "Pending"
+            print(f"{index}. [{status}] {task['task_name']}")
+
+def main():
+    print("To-Do List Program")
+    todo_list = []
+
+    while True:
+        print("\nOptions:")
+        print("1. Add Task")
+        print("2. Mark Task as Completed")
+        print("3. Remove Task")
+        print("4. Display Tasks")
+        print("5. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            add_task(todo_list)
+        elif choice == '2':
+            mark_task_as_completed(todo_list)
+        elif choice == '3':
+            remove_task(todo_list)
+        elif choice == '4':
+            display_tasks(todo_list)
+        elif choice == '5':
+            print("Exiting program...")
+            break
+        else:
+            print("Invalid choice. Please enter a number from 1 to 5.")
+
+if __name__ == "__main__":
+    main()
